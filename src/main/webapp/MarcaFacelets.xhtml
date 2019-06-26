@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/recursos/template/template.xhtml">
+
+	<ui:define name="tituloPrincipal">Marcas Cadastradas</ui:define>
+	<ui:define name="tituloSecundario"></ui:define>
+
+	<ui:define name="botoesAcao">
+		<p:button value="Voltar" href="Marca.jsf" update="@form" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+		<ui:define name="#{marcaBean}" />
+		<p:dataTable value="#{marcaBean.listarMarca()}" var="ma">
+
+			<p:column headerText="Nome">
+				<h:outputText value="#{ma.nome}" />
+			</p:column>
+
+			<p:column headerText="Descrição do produto: ">
+				<h:outputText value="#{ma.descricao}" />
+			</p:column>
+
+			<p:column headerText="Ação">
+				<p:commandButton value="Excluir"
+					action="#{marcaBean.excluirMarca(ma)}"
+					update="@form" />
+			</p:column>
+
+		</p:dataTable>
+
+	</ui:define>
+</ui:composition>
+</html>

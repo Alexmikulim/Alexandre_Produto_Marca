@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+       xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/recursos/template/template.xhtml">
+	
+	<ui:define name="tituloPrincipal">Cadastro Produto</ui:define>
+	<ui:define name="tituloSecundario">Insira os dados do Produto</ui:define>
+
+	<ui:define name="botoesAcao">
+		<p:commandButton value="Salvar"
+			action="#{produtoBean.cadastrarProduto()}" update="@form" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+	
+	<p:panelGrid columns="3">
+
+			<p:outputLabel for="n1" value="Nome: " />
+			<p:inputText id="n1" value="#{produtoBean.produto.nome}" />
+			<p:message for="n1" />
+
+			<p:outputLabel for="n2" value="Marca: " />
+			<p:selectOneMenu id="n2" value="#{produtoBean.produto.marca}" converter="omnifaces.SelectItemsIndexConverter">
+			<f:selectItem  itemLabel="--Selecione--" noSelectionOption="true"/>
+			<f:selectItems value="#{marcaBean.marcas}" var="marca" itemLabel="#{marca.nome}" itemValue="#{marca}"/>
+			</p:selectOneMenu>
+			<p:message for="n2" />
+			
+			<p:outputLabel for="n3" value="Preço: " />
+			<p:inputNumber thousandSeparator="." decimalSeparator="," decimalPlaces="2" id="n3" value="#{produtoBean.produto.preco}" />
+			<p:message for="n3" />
+
+		</p:panelGrid>
+	
+	</ui:define>
+
+	
+	
+	</ui:composition>
+</html>

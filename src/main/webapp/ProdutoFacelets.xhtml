@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/recursos/template/template.xhtml">
+
+	<ui:define name="tituloPrincipal">Produtos Cadastradas</ui:define>
+	<ui:define name="tituloSecundario"></ui:define>
+
+	<ui:define name="botoesAcao">
+		<p:button value="Voltar" href="Produto.jsf" update="@form" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+		<ui:define name="#{produtoBean}" />
+		<p:dataTable value="#{produtoBean.listarProduto()}" var="pa">
+
+			<p:column headerText="Nome">
+				<h:outputText value="#{pa.nome}" />
+			</p:column>
+
+			<p:column headerText="Marca: ">
+				<h:outputText value="#{pa.marca.nome}" />
+			</p:column>
+
+			<p:column headerText="Preço: ">
+				<h:outputText value="#{pa.preco}" />
+			</p:column>
+
+			<p:column headerText="Ação">
+				<p:commandButton value="Excluir"
+					action="#{produtoBean.excluirProduto(pa)}" update="@form" />
+			</p:column>
+
+		</p:dataTable>
+
+	</ui:define>
+</ui:composition>
+</html>
